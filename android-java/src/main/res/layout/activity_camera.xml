@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- CameraX Viewfinder -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Top Guidance Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="#88000000">
+
+        <ImageButton
+            android:id="@+id/btn_camera_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:tint="#FFFFFF"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Scan ID Card or Marksheet"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+
+    <!-- Document Frame Guide (Visual Target Box) -->
+    <View
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="#44FFFFFF" />
+
+    <!-- Bottom Capture Panel -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:background="#88000000">
+
+        <TextView
+            android:id="@+id/tv_scan_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Align document within frame and tap scan"
+            android:textColor="#DDFFFFFF"
+            android:textSize="13sp"
+            android:layout_marginBottom="16dp" />
+
+        <ProgressBar
+            android:id="@+id/progress_scanning"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#FFFFFF"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp" />
+
+        <ImageButton
+            android:id="@+id/btn_capture"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@color/primary"
+            android:src="@android:drawable/ic_menu_camera"
+            android:tint="#FFFFFF"
+            android:contentDescription="Capture &amp; Scan" />
+
+    </LinearLayout>
+
+</FrameLayout>

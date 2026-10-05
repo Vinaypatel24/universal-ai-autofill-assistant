@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:drawable/dialog_holo_light_frame"
+    android:backgroundTint="@color/surface"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/card_avatar"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@color/primary"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="P" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp">
+
+            <TextView
+                android:id="@+id/card_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Personal Profile"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/card_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pushpraj Singhal"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn_delete_profile"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="#E53935"
+            android:contentDescription="Delete Profile" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/card_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="✉️ user@example.com"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/card_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📞 +91 9876543210"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/card_sections_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📋 2 Custom Sections"
+        android:textSize="12sp"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp" />
+
+</LinearLayout>

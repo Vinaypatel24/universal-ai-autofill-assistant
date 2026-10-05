@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <TextView
+        android:id="@+id/tv_page_icon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="#EDE7F6"
+        android:gravity="center"
+        android:textSize="44sp"
+        android:text="✨" />
+
+    <TextView
+        android:id="@+id/tv_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Universal Form Fill"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:gravity="center"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:id="@+id/tv_page_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Automatically populate applications across any Android app, browser, or hybrid WebView with one tap."
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>
