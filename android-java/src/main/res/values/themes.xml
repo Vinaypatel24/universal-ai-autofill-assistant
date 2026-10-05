@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme — AppCompat required for AppCompatActivity -->
+    <style name="Theme.SmartAutofill" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!-- Splash screen theme (same base) -->
+    <style name="Theme.SmartAutofill.Splash" parent="Theme.SmartAutofill">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
+</resources>
