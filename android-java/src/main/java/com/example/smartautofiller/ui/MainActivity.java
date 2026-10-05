@@ -29,6 +29,7 @@ import com.example.smartautofiller.database.ProfileJsonSerializer;
 import com.example.smartautofiller.model.ProfileSection;
 import com.example.smartautofiller.model.SectionField;
 import com.example.smartautofiller.model.UserProfile;
+import com.example.smartautofiller.security.PinManager;
 import com.example.smartautofiller.service.SmartAccessibilityService;
 
 import java.util.ArrayList;
@@ -143,6 +144,11 @@ public class MainActivity extends AppCompatActivity implements ProfileAdapter.On
 
         Button btnBackup = findViewById(R.id.btn_export_import);
         btnBackup.setOnClickListener(v -> showBackupDialog());
+
+        Button btnSecurity = findViewById(R.id.btn_security_pin);
+        if (btnSecurity != null) {
+            btnSecurity.setOnClickListener(v -> showSecurityDialog());
+        }
     }
 
     private void setupRecyclerView() {
@@ -288,9 +294,43 @@ public class MainActivity extends AppCompatActivity implements ProfileAdapter.On
                 .show();
     }
 
+    private void showSecurityDialog() {
+        PinManager pinManager = new PinManager(this);
+        if (pinManager.isPinSet()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("🔐 PIN Lock Security")
+                    .setMessage("App is protected by a 4-digit PIN.")
+                    .setPositiveButton("Change PIN", (dialog, which) -> {
+                        Intent intent = new Intent(this, PinLockActivity.class);
+                        intent.putExtra(PinLockActivity.EXTRA_MODE, PinLockActivity.MODE_SETUP);
+                        startActivity(intent);
+                    })
+                    .setNeutralButton("Remove PIN", (dialog, which) -> {
+                        pinManager.clearPin();
+                        Toast.makeText(this, "PIN protection removed", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("🔐 Setup PIN Lock")
+                    .setMessage("Protect your sensitive identity numbers (Aadhaar, PAN, Passport) with a 4-digit PIN.")
+                    .setPositiveButton("Set PIN Now", (dialog, which) -> {
+                        Intent intent = new Intent(this, PinLockActivity.class);
+                        intent.putExtra(PinLockActivity.EXTRA_MODE, PinLockActivity.MODE_SETUP);
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("Later", null)
+                    .show();
+        }
+    }
+
     @Override
     public void onProfileClick(UserProfile profile) {
-        Toast.makeText(this, "Selected Profile: " + profile.getProfileName(), Toast.LENGTH_SHORT).show();
+        if (profile == null) return;
+        Intent intent = new Intent(this, ProfileViewActivity.class);
+        intent.putExtra(ProfileViewActivity.EXTRA_PROFILE_ID, profile.getId());
+        startActivity(intent);
     }
 
     @Override

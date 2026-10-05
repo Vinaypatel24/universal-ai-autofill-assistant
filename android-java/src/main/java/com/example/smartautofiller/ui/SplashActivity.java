@@ -16,7 +16,7 @@ import com.example.smartautofiller.security.PinManager;
  */
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY_MS = 1200;
+    private static final int SPLASH_DELAY_MS = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +30,14 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("autofill_prefs", MODE_PRIVATE);
         boolean onboardingDone = prefs.getBoolean("onboarding_done", false);
 
+        PinManager pinManager = new PinManager(this);
+
         Intent intent;
         if (!onboardingDone) {
             intent = new Intent(SplashActivity.this, OnboardingActivity.class);
+        } else if (pinManager.isPinSet()) {
+            intent = new Intent(SplashActivity.this, PinLockActivity.class);
+            intent.putExtra(PinLockActivity.EXTRA_MODE, PinLockActivity.MODE_UNLOCK);
         } else {
             intent = new Intent(SplashActivity.this, MainActivity.class);
         }

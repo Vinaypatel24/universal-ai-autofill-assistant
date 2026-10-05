@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -23,10 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Full-screen profile creation activity with comprehensive sections:
- * Personal, ID Numbers, Contact, Address, Education, Professional
+ * Full-screen profile creation and editing activity with comprehensive sections:
+ * Personal, ID Numbers, Contact, Address, Education, Professional.
  */
 public class ProfileCreateActivity extends AppCompatActivity {
+
+    public static final String EXTRA_EDIT_ID = "edit_profile_id";
 
     // Personal
     private EditText etProfileName, etFullName, etFatherName, etMotherName, etDob, etGender;
@@ -41,6 +44,7 @@ public class ProfileCreateActivity extends AppCompatActivity {
     // Professional
     private EditText etCompany, etDesignation, etLinkedin, etGithub;
 
+    private int editingProfileId = -1;
     private ActivityResultLauncher<Intent> cameraLauncher;
 
     @Override
@@ -52,8 +56,12 @@ public class ProfileCreateActivity extends AppCompatActivity {
         setupCameraLauncher();
         setupButtons();
 
-        // Pre-fill from intent if coming from scan
-        handleScanPrefill(getIntent());
+        editingProfileId = getIntent().getIntExtra(EXTRA_EDIT_ID, -1);
+        if (editingProfileId != -1) {
+            loadProfileForEditing(editingProfileId);
+        } else {
+            handleScanPrefill(getIntent());
+        }
     }
 
     private void bindViews() {
@@ -139,6 +147,69 @@ public class ProfileCreateActivity extends AppCompatActivity {
         }
     }
 
+    private void loadProfileForEditing(int profileId) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            UserProfile p = AppDatabase.getDatabase(this).userProfileDao().getProfileById(profileId);
+            if (p == null) return;
+            new Handler(Looper.getMainLooper()).post(() -> {
+                TextView tvTitle = findViewById(R.id.tv_form_title);
+                if (tvTitle != null) tvTitle.setText("Edit Profile");
+                Button btnSave = findViewById(R.id.btn_save_profile);
+                if (btnSave != null) btnSave.setText("Update Profile");
+
+                etProfileName.setText(p.getProfileName());
+                etFullName.setText(p.getFullName());
+                etEmail.setText(p.getEmail());
+                etPhone.setText(p.getPhoneNumber());
+
+                if (p.getSections() != null) {
+                    for (ProfileSection sec : p.getSections()) {
+                        if (sec.getFields() == null) continue;
+                        for (SectionField f : sec.getFields()) {
+                            setFieldValue(f.getLabel(), f.getValue());
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    private void setFieldValue(String label, String value) {
+        if (label == null || value == null || value.isEmpty()) return;
+        switch (label) {
+            case "Full Name":        setIfNotEmpty(etFullName, value); break;
+            case "Father's Name":    setIfNotEmpty(etFatherName, value); break;
+            case "Mother's Name":    setIfNotEmpty(etMotherName, value); break;
+            case "Date of Birth":    setIfNotEmpty(etDob, value); break;
+            case "Gender":           setIfNotEmpty(etGender, value); break;
+            case "Aadhaar Number":   setIfNotEmpty(etAadhaar, value); break;
+            case "PAN Number":       setIfNotEmpty(etPan, value); break;
+            case "Passport No.":     setIfNotEmpty(etPassport, value); break;
+            case "Email":            setIfNotEmpty(etEmail, value); break;
+            case "Mobile":           setIfNotEmpty(etPhone, value); break;
+            case "WhatsApp":         setIfNotEmpty(etWhatsapp, value); break;
+            case "Alternate Phone":  setIfNotEmpty(etAltPhone, value); break;
+            case "House No.":        setIfNotEmpty(etHouseNo, value); break;
+            case "Street":           setIfNotEmpty(etStreet, value); break;
+            case "City":             setIfNotEmpty(etCity, value); break;
+            case "Pincode":          setIfNotEmpty(etPincode, value); break;
+            case "State":            setIfNotEmpty(etState, value); break;
+            case "Country":          setIfNotEmpty(etCountry, value); break;
+            case "School":           setIfNotEmpty(etSchool, value); break;
+            case "Class 10 %":       setIfNotEmpty(etClass10, value); break;
+            case "Class 12 %":       setIfNotEmpty(etClass12, value); break;
+            case "College":          setIfNotEmpty(etCollege, value); break;
+            case "Degree":           setIfNotEmpty(etDegree, value); break;
+            case "Branch":           setIfNotEmpty(etBranch, value); break;
+            case "CGPA":             setIfNotEmpty(etCgpa, value); break;
+            case "Passing Year":     setIfNotEmpty(etPassYear, value); break;
+            case "Company":          setIfNotEmpty(etCompany, value); break;
+            case "Designation":      setIfNotEmpty(etDesignation, value); break;
+            case "LinkedIn":         setIfNotEmpty(etLinkedin, value); break;
+            case "GitHub":           setIfNotEmpty(etGithub, value); break;
+        }
+    }
+
     private void setIfNotEmpty(EditText field, String value) {
         if (value != null && !value.isEmpty()) {
             field.setText(value);
@@ -168,6 +239,10 @@ public class ProfileCreateActivity extends AppCompatActivity {
                 etPhone.getText().toString().trim(),
                 buildFullAddress()
         );
+
+        if (editingProfileId != -1) {
+            profile.setId(editingProfileId);
+        }
 
         // Personal section
         List<SectionField> personalFields = new ArrayList<>();
@@ -249,9 +324,14 @@ public class ProfileCreateActivity extends AppCompatActivity {
 
         // Save to Room DB
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            AppDatabase.getDatabase(this).userProfileDao().insertProfile(profile);
+            if (editingProfileId != -1) {
+                AppDatabase.getDatabase(this).userProfileDao().updateProfile(profile);
+            } else {
+                AppDatabase.getDatabase(this).userProfileDao().insertProfile(profile);
+            }
             new Handler(Looper.getMainLooper()).post(() -> {
-                Toast.makeText(this, "✅ Profile '" + profileName + "' saved!", Toast.LENGTH_LONG).show();
+                String msg = editingProfileId != -1 ? "✅ Profile updated!" : "✅ Profile '" + profileName + "' saved!";
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
                 finish();
             });
         });

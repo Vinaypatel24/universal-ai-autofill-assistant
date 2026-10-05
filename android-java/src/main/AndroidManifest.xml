@@ -44,6 +44,18 @@
             android:label="Create Profile"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Profile Detail View Activity -->
+        <activity
+            android:name=".ui.ProfileViewActivity"
+            android:exported="false"
+            android:label="Profile Details" />
+
+        <!-- 4-Digit Security PIN Lock Activity -->
+        <activity
+            android:name=".ui.PinLockActivity"
+            android:exported="false"
+            android:label="Security PIN" />
+
         <!-- Camera OCR Document Scanner Activity -->
         <activity
             android:name=".ui.CameraActivity"
