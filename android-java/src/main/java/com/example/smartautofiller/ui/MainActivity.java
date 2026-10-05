@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements ProfileAdapter.On
     protected void onResume() {
         super.onResume();
         updateServiceStateUI();
+        loadProfiles(); // Refresh list when returning from ProfileCreateActivity
     }
 
     private void initViews() {
@@ -135,7 +136,10 @@ public class MainActivity extends AppCompatActivity implements ProfileAdapter.On
         switchBubble = findViewById(R.id.switch_bubble);
 
         Button btnAddProfile = findViewById(R.id.btn_add_profile);
-        btnAddProfile.setOnClickListener(v -> showAddProfileDialog());
+        btnAddProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileCreateActivity.class);
+            startActivity(intent);
+        });
 
         Button btnBackup = findViewById(R.id.btn_export_import);
         btnBackup.setOnClickListener(v -> showBackupDialog());

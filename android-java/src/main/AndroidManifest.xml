@@ -37,6 +37,13 @@
             android:name=".ui.OnboardingActivity"
             android:exported="false" />
 
+        <!-- Comprehensive Profile Creation Activity -->
+        <activity
+            android:name=".ui.ProfileCreateActivity"
+            android:exported="false"
+            android:label="Create Profile"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- Camera OCR Document Scanner Activity -->
         <activity
             android:name=".ui.CameraActivity"
