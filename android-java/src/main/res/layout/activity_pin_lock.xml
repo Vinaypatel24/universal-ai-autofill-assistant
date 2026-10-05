@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         android:text="Skip PIN (not recommended)"
         android:textColor="#9E9E9E"
-        android:background="@null"
+        android:background="?android:attr/selectableItemBackground"
         android:textSize="12sp"
         android:layout_marginTop="20dp" />
 

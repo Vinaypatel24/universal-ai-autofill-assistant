@@ -55,12 +55,28 @@ public class ProfileSection implements Serializable {
         this.name = name;
     }
 
+    public String getTitle() {
+        return name;
+    }
+
+    public void setTitle(String title) {
+        this.name = title;
+    }
+
     public String getIcon() {
         return icon;
     }
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getEmoji() {
+        return icon;
+    }
+
+    public void setEmoji(String emoji) {
+        this.icon = emoji;
     }
 
     public List<SectionField> getFields() {

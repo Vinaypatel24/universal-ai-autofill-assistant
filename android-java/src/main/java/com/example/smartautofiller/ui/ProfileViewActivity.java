@@ -122,7 +122,9 @@ public class ProfileViewActivity extends AppCompatActivity {
     private void addSectionView(LinearLayout container, ProfileSection section) {
         // Section header
         TextView header = new TextView(this);
-        header.setText(section.getEmoji() + "  " + section.getTitle().toUpperCase());
+        String icon = (section.getIcon() != null && !section.getIcon().isEmpty()) ? section.getIcon() : "📋";
+        String name = (section.getName() != null && !section.getName().isEmpty()) ? section.getName() : "Section";
+        header.setText(icon + "  " + name.toUpperCase());
         header.setTextSize(11f);
         header.setTextColor(0xFF6200EE);
         header.setTypeface(null, android.graphics.Typeface.BOLD);
