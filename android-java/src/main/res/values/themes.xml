@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme — AppCompat required for AppCompatActivity -->
-    <style name="Theme.SmartAutofill" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Force Light theme — avoids white-text-on-white-background in dark mode -->
+    <style name="Theme.SmartAutofill" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/windowBackground</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-    </style>
-
-    <!-- Splash screen theme (same base) -->
-    <style name="Theme.SmartAutofill.Splash" parent="Theme.SmartAutofill">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:editTextColor">@color/text_primary</item>
+        <item name="editTextColor">@color/text_primary</item>
     </style>
 
 </resources>

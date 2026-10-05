@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    android:background="@color/surface">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,80 +16,160 @@
             android:text="Create User Profile"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary" />
+            android:textColor="#1A1A2E"
+            android:layout_marginBottom="4dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fill in details to autofill on forms"
+            android:text="Fill in details manually OR scan a document to auto-fill"
             android:textSize="12sp"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="2dp"
+            android:textColor="#757575"
             android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/btn_scan_document"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:backgroundTint="#EDE7F6"
-            android:text="📷 Scan Document (Aadhaar, PAN, Marksheet)"
-            android:textColor="@color/primary"
-            android:textSize="13sp"
-            android:layout_marginBottom="14dp" />
+        <!-- Step 1: Profile Tag -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile Name *"
+            android:textSize="12sp"
+            android:textColor="#6200EE"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/et_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Profile Tag (e.g. Personal, Work, College)"
+            android:hint="e.g. Personal, Work, College"
             android:inputType="textCapWords"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp" />
+            android:textColor="#1A1A2E"
+            android:textColorHint="#AAAAAA"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Step 2: Full Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name *"
+            android:textSize="12sp"
+            android:textColor="#6200EE"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/et_full_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name"
+            android:hint="Your full name"
             android:inputType="textPersonName"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp" />
+            android:textColor="#1A1A2E"
+            android:textColorHint="#AAAAAA"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Step 3: Email -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textSize="12sp"
+            android:textColor="#6200EE"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email Address"
+            android:hint="your@email.com"
             android:inputType="textEmailAddress"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp" />
+            android:textColor="#1A1A2E"
+            android:textColorHint="#AAAAAA"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Step 4: Phone -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textSize="12sp"
+            android:textColor="#6200EE"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone / Mobile Number"
+            android:hint="+91 9876543210"
             android:inputType="phone"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp" />
+            android:textColor="#1A1A2E"
+            android:textColorHint="#AAAAAA"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Step 5: Address -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textSize="12sp"
+            android:textColor="#6200EE"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Residential Address"
+            android:hint="Your residential address"
             android:inputType="textPostalAddress|textMultiLine"
             android:textSize="14sp"
+            android:textColor="#1A1A2E"
+            android:textColorHint="#AAAAAA"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
             android:lines="3"
             android:layout_marginBottom="16dp" />
 
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Scan Button (optional) -->
+        <Button
+            android:id="@+id/btn_scan_document"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:backgroundTint="#EDE7F6"
+            android:text="📷  Auto-fill by Scanning Document"
+            android:textColor="#6200EE"
+            android:textSize="13sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Save Button -->
         <Button
             android:id="@+id/btn_save_profile"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/primary"
-            android:text="Save Profile"
+            android:layout_height="52dp"
+            android:backgroundTint="#6200EE"
+            android:text="✓  Save Profile"
             android:textColor="#FFFFFF"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
     </LinearLayout>
